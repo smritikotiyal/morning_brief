@@ -128,7 +128,7 @@ if __name__ == "__main__":
         name="morning-brief-deployment",
         work_pool_name="my-managed-pool",
         cron = "35 04 * * *",
-        tags= ["news", "daily", "email"]
+        tags= ["news", "daily", "email"],
         storage=GitRepository(
             url="https://github.com/smritikotiyal/morning_brief.git",
             branch="main"
