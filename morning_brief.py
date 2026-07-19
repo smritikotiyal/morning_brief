@@ -129,7 +129,7 @@ if __name__ == "__main__":
     ).deploy(
         name="morning-brief-deployment",
         work_pool_name="my-managed-pool",
-        cron="0 15 * * *",
+        cron="45 04 * * *",
         tags=["news", "daily", "email"],
         job_variables={
             "pip_packages": [
