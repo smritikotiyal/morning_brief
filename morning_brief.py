@@ -123,14 +123,18 @@ def morning_brief_flow(num_results: int = 10):
     print("Morning brief delivered!")
 
 if __name__ == "__main__":
-    # morning_brief_flow()
-    morning_brief_flow.deploy(
+    morning_brief_flow.from_source(
+        source="https://github.com/smritikotiyal/morning_brief.git",
+        entrypoint="morning_brief.py:morning_brief_flow",
+    ).deploy(
         name="morning-brief-deployment",
         work_pool_name="my-managed-pool",
-        cron = "35 04 * * *",
-        tags= ["news", "daily", "email"],
-        storage=GitRepository(
-            url="https://github.com/smritikotiyal/morning_brief.git",
-            branch="main"
-        )
+        cron="0 15 * * *",
+        tags=["news", "daily", "email"],
+        job_variables={
+            "pip_packages": [
+                "duckduckgo-search>=3.9.0",
+                "python-dotenv==1.0.0"
+            ]
+        }
     )
