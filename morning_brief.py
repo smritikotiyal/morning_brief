@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from duckduckgo_search import DDGS
 from prefect import flow, task
 from prefect.blocks.system import Secret
+from prefect.runner.storage import GitRepository
 
 load_dotenv()
 
@@ -126,6 +127,10 @@ if __name__ == "__main__":
     morning_brief_flow.deploy(
         name="morning-brief-deployment",
         work_pool_name="my-managed-pool",
-        cron = "30 04 * * *",
+        cron = "35 04 * * *",
         tags= ["news", "daily", "email"]
+        storage=GitRepository(
+            url="https://github.com/smritikotiyal/morning_brief.git",
+            branch="main"
+        )
     )
